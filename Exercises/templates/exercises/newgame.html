@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Start game </title>
+        <link rel="stylesheet" href="{% static 'exercises/exercises.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body class="newgame">
+        <div class="text">
+            <p class="title">The Lost Island</p>
+        </div>
+        <div class="spacer"></div>
+        <form class="text" action="/exercises/game" method="post">
+            {% csrf_token %}
+            <p class="title">Customize your adventure!</p>
+            <div class="row">
+                <p class="description rowblock"> Player's Name </p>
+                <input id="player_name" name="player_name" class="textinput rowblock" type="text" required="true"></input>
+            </div>
+            <div class="row">
+                <p class="description rowblock"> Difficulty Level</p>
+                <select id="difficulty_level" name="difficulty_level" class="dropdownbutton rowblock" type="text" required="true">
+                    <option disabled="true" selected> -- Select a difficulty level -- </option>
+                    {% for difficulty in difficulty_levels %}
+                    <option>{{ difficulty }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <p class="description rowblock"> Exercise Type Focus</p>
+                <select id="exercise_type" name="exercise_type" class="dropdownbutton rowblock" type="text" required="true">
+                    <option disabled="true" selected> -- Select an exercise type -- </option>
+                    {% for exercise_type in exercises_types %}
+                    <option>{{ exercise_type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <p class="description rowblock"> Body Part Focus</p>
+                <select id="body_part" name="body_part"class="dropdownbutton rowblock" type="text" required="true">
+                    <option disabled="true" selected> -- Select a body part to focus on --</option>
+                    <option>All body parts</option>
+                    {% for body_part in body_parts_names %}
+                    <option>{{ body_part }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input class="button" type="submit" value="Start Game"/>
+        </form>
+    </body>
+</html> 

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'exercises/exercises.css' %}"/>
+  </head>
+  <body class="index">
+      <div class="text">
+          <p class="title">The Lost Island</p>
+          <p class="description center">Gather resources, build a shelter.</p>
+          <p class="description">Gather materials, build a raft.</p>
+          <p class="description">Leave the Lost Island</p>
+      </div>
+      <div class="spacer"></div>
+      <div class="button" onclick="changePage()">
+          Start the adventure
+      </div>
+
+      <script>
+          function changePage() {
+              location.replace("/exercises/newgame");
+          }
+      </script>
+  </body>
+</html>
