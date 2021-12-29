@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Lost Island </title>
+        <link rel="icon" sizes="16x16" href="{% static 'lostislandapp/favicon-16x16.png' %}"/>
+        <link rel="stylesheet" href="{% static 'lostislandapp/exercises.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body class="game">
+        <div class="spacer"></div>
+        <div class="text">
+            <p class="description"> Gatter resources to build a raft and leave </p>
+            <p class="description"> the Lost Island! </p>
+            <p>  </p>
+            <p>  </p>
+        </div>
+        <div class="row">
+            <div class="button rowblock">Gatter food</div>
+            <div class="button rowblock">Gatter water</div>
+            <div class="button rowblock">Build a shelter</div>
+        </div>
+        <div class="button">Build a raft</div>
+        <div class="row text">
+            <p class="description">Bag of items: </p>
+            <label class="description">0 / 70</label>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Lost Island </title>
+    <link rel="icon" sizes="16x16" href="{% static 'lostislandapp/favicon-16x16.png' %}"/>
+    <link rel="stylesheet" href="{% static 'lostislandapp/exercises.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body class="index">
+      <div class="text">
+          <p class="title">The Lost Island</p>
+          <p class="description center">Gather resources, build a shelter.</p>
+          <p class="description">Gather materials, build a raft.</p>
+          <p class="description">Leave the Lost Island</p>
+      </div>
+      <div class="spacer"></div>
+      <div class="button" onclick="changePage()">
+          Start the adventure
+      </div>
+
+      <script>
+          function changePage() {
+              location.replace("/thelostisland/newgame");
+          }
+      </script>
+  </body>
+</html>
