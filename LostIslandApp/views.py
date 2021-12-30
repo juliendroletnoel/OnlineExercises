@@ -1,6 +1,7 @@
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
+import json
 
 from ExercisesGenerator.ExerciseGenerator import ExerciseGenerator
 # Create your views here.
@@ -31,8 +32,9 @@ def request_available_body_parts(request, exercisetypename):
         available_body_parts = exercise_generator.get_available_body_part_name(exercisetypename)
     except ValueError as e:
         return HttpResponseBadRequest(e)
-    
-    return render(request, {'body_parts': available_body_parts})
+
+    formatted_response = json.dumps(tuple(available_body_parts))
+    return HttpResponse(formatted_response)
 
 def game(request):
     """

@@ -6,6 +6,54 @@
         <link rel="icon" sizes="16x16" href="{% static 'lostislandapp/favicon-16x16.png' %}"/>
         <link rel="stylesheet" href="{% static 'lostislandapp/exercises.css' %}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            function onExerciseTypeSelection(){
+                var exerciseTypeName = document.getElementById('exercise_type').value;
+                let selector = document.getElementById('body_part');
+                selector.length = 0;
+                let defaultOption = document.createElement('option');
+                defaultOption.text = '-- Select a body part to focus on --';
+                selector.add(defaultOption);
+                let allOption = document.createElement('option');
+                allOption.text = 'All';
+                selector.add(allOption);
+                selector.selectedIndex = 0;
+
+                const url = 'http://127.0.0.1:8080/thelostisland/request_available_body_parts/' + exerciseTypeName;
+                
+                const xhttp = new XMLHttpRequest();
+                xhttp.open('GET', url, true)
+                xhttp.onload = function() {
+
+                    if (xhttp.status == 200){
+                        const bodyPartsList = JSON.parse(xhttp.responseText);
+                        console.debug('Body Parts List: ', bodyPartsList);
+                        console.debug('Body Parts List length: ', bodyPartsList.length);
+                        let option;
+                        for (let i = 0; i < bodyPartsList.length; i ++){
+                            bodyPartName = bodyPartsList[i];
+                            console.debug('Body Part Name :', bodyPartName);
+                            option = document.createElement('option');
+                            option.text = bodyPartName;
+                            option.value = bodyPartName;
+                            selector.add(option);
+                        }
+                    }
+                    else{
+                        console.error(xhttp.status + ': ' + xhttp.statusText);
+                    }
+
+                    document.getElementById('exercise_type');
+                }
+
+                xhttp.onerror = function() {
+                    console.error('An error happened with ' + url)
+                }
+
+                xhttp.send();
+            }
+
+        </script>
     </head>
     <body class="newgame">
         <div class="text">
@@ -21,7 +69,7 @@
             </div>
             <div class="row">
                 <p class="description rowblock"> Exercise Type Focus</p>
-                <select id="exercise_type" name="exercise_type" class="dropdownbutton rowblock" type="text" required="true">
+                <select id="exercise_type" name="exercise_type" class="dropdownbutton rowblock" type="text" required="true", onclick="onExerciseTypeSelection()">
                     <option disabled="true" selected> -- Select an exercise type -- </option>
                     {% for exercise_type in exercises_types %}
                     <option>{{ exercise_type }}</option>
